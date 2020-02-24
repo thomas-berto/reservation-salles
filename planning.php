@@ -32,16 +32,17 @@
 <?php
 	
 						
-$ligne = 12;
+$ligne = 11;
 $colonne = 7;
 $jour = array('Lundi','Mardi','Mercredi','Jeudi','Vendredi',
 'Samedi','Dimanche');
-$heure=array('08h00','09h00','10h00','11h00','12h00','13h00',
-'14h00','15h00','16h00','17h00','18h00','19h00','')	;
+$heure=array('08h','09h','10h','11h','12h','13h',
+'14h','15h','16h','17h','18h','19h',)	;
+
 $connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
 $sql = "SELECT * FROM reservations ";
-	$resultat = mysqli_query($connexion, $sql);
-while($data = mysqli_fetch_array($resultat))
+$resultat = mysqli_query($connexion, $sql);
+
 
 ?>
    <tbody>
@@ -57,9 +58,14 @@ echo '<td class="heure">', $heure[$j], '</td>';
 	</tr>
 	<tr>
 <?php
-    if ($data['debut'] == $heure && $data['fin'] == $heure)
-	echo '<td>'.$data['titre'].'</td>';
-	?>
+while($row = $resultat->fetch_assoc()) {
+	$id=$row["id"];
+	echo "<a href='reservation.php?id=", $id, "'>";
+	echo "<td>Titre: ".$row["titre"]."<br /><a href=\"reservation.php?id=".$id."\">Plus d'infos</a></td>";
+	echo "<td>".$row["id"]."</td><td>".$row["titre"]." ".$row["description"]."</td> ";
+	echo '</a>';
+}
+?>
 </tr>
    </tbody>
 
@@ -69,9 +75,7 @@ echo '<td class="heure">', $heure[$j], '</td>';
 </section>
 </main>
 <footer>
-				<section>
-				Copyright © 2020 All rights reserved
-		</section>
+				
 	</footer>	
 </body>
 </html>
