@@ -2,34 +2,35 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="index.css"/>
-		<title>Inscription</title>
+		<title>index</title>
 	</head>
 
-<body>
+<body class="connexion">
 
-  <header class="topnav">
+<header class="menu">
  <nav>
 <ul>
-<?php include('header.php') ?>
+<?php include('header.php');
+if(isset($_SESSION['deconnexion'])){header('Location: connexion.php');}?>
+
 </ul>
  </nav>
 </header>
 
-<main>
+
+<section>
+	<article class="fermeture">
+		
+<h1> <a href='connexion.php'> Reservez votre creneau </h1></a>
 
 
+</article>
+</section>
 
-
-
-
-
-
-</main>
 <footer>
-				<section>
-				Copyright © 2020 All rights reserved
-		</section>
+				
+				Copyright © 2020 All rights reserved	
+				
 	</footer>	
 </body>
 </html>
-

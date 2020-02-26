@@ -1,4 +1,23 @@
-<section>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="index.css"/>
+		<title>planning</title>
+	</head>
+	<body>
+		<header class="menu">
+		<nav>
+<ul>
+<?php include('header.php');
+		if(!isset($_SESSION['login'])){header('Location: connexion.php');}
+
+?>
+</ul>
+ </nav>
+		</header>
+
+<section class='contai'>
       <?php  
      
 $connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
@@ -10,13 +29,13 @@ ON reservations.id_utilisateur = utilisateurs.id ";
        {
       ?>
 
-<div class='containe'>
-		 				 <p><?php echo $data['login'];?></p>
-             <p><?php echo $data['titre'];?></p>
-             <p><?php echo $data['description'];?></p>	
-             <p><?php echo $data['debut'];?></p>
-             <p><?php echo $data['fin'];?></p>
-                          </div>
+<article>
+		 <article class='login'><?php echo $data['login'];?></article>
+             <article class='login'><?php echo $data['titre'];?></article>
+             <artile class='reservation'><?php echo $data['description'];?></article>	
+             <article class='reservation'><?php echo $data['debut'];?></article>
+             <article  class='reservation'><?php echo $data['fin'];?></article>
+                          </article>
     </section>
     <?php
 		  }
@@ -27,3 +46,10 @@ ON reservations.id_utilisateur = utilisateurs.id ";
 			
 					?>
 </main>
+<footer>
+				
+				Copyright © 2020 All rights reserved
+		
+	</footer>	
+</body>
+</html>

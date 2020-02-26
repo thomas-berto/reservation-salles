@@ -2,13 +2,15 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="index.css"/>
-		<title>Inscription</title>
+		<title>planning</title>
 	</head>
 	<body>
-		<header>
+		<header class="menu">
 		<nav>
 <ul>
-<?php include('header.php')
+<?php include('header.php');
+		if(!isset($_SESSION['login'])){header('Location: connexion.php');}
+
 ?>
 </ul>
  </nav>
@@ -36,36 +38,63 @@ $ligne = 11;
 $colonne = 7;
 $jour = array('Lundi','Mardi','Mercredi','Jeudi','Vendredi',
 'Samedi','Dimanche');
-$heure=array('08h','09h','10h','11h','12h','13h',
-'14h','15h','16h','17h','18h','19h',)	;
-
+$heure=array('08h00','09h00','10h00','11h00','12h00','13h00',
+'14h00','15h00','16h00','17h00','18h00','19h00')	;
 $connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
 $sql = "SELECT * FROM reservations ";
-$resultat = mysqli_query($connexion, $sql);
+$query = mysqli_query($connexion, $sql);
+$resultat=mysqli_fetch_all($query);
 
 
 ?>
    <tbody>
     <tr>
-<?php
-    for ($j=0; $j<=$ligne; $j++) 
-    { 
 
-echo '<tr class="ligne">';
-echo '<td class="heure">', $heure[$j], '</td>';
-    } 
-?>
-	</tr>
-	<tr>
 <?php
-while($row = $resultat->fetch_assoc()) {
-	$id=$row["id"];
-	echo "<a href='reservation.php?id=", $id, "'>";
-	echo "<td>Titre: ".$row["titre"]."<br /><a href=\"reservation.php?id=".$id."\">Plus d'infos</a></td>";
-	echo "<td>".$row["id"]."</td><td>".$row["titre"]." ".$row["description"]."</td> ";
-	echo '</a>';
+
+
+for($ligne =8; $ligne <= 19; $ligne++ )
+{
+
+		echo '<tr>';
+		echo "<td>".$ligne."</td>";
+
+  	for($colonne = 1; $colonne <= 7; $colonne++)
+  	{
+    
+				echo "<td>";
+				foreach($resultat as $value){
+
+	$id=$value[0];
+					$jour=date("w", strtotime($value[3]));
+					$heure=date("H", strtotime($value[3]));
+				
+					if($heure==$ligne && $jour== $colonne)
+						{
+						
+						echo"<a href=\"reservation.php?id=".$id."\">$value[2]</a>";
+						
+						
+					
+						}
+						else{
+							//echo "non";
+						}
+						
+						
+						
+						 
+		
+						
+		}
+		echo '</td>';
+	}
+		echo '</tr>';			
 }
 ?>
+
+
+
 </tr>
    </tbody>
 
@@ -73,9 +102,12 @@ while($row = $resultat->fetch_assoc()) {
 
 
 </section>
+
 </main>
 <footer>
 				
+				Copyright © 2020 All rights reserved
+		
 	</footer>	
 </body>
 </html>
