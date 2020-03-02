@@ -61,7 +61,7 @@ text-align: center;
 color: white;
 font-size: 150%;
 }
-a {color: white;}
+a {color: red;}
 
 .fermeture{
   background-image: ;
@@ -242,7 +242,7 @@ input[type=submit] {
  width:100px;
  margin-left:15%;
  box-shadow:1px 1px 1px #D83F3D;
- color: green;
+ color: red;
  cursor:pointer;
  border:none;
  

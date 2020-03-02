@@ -65,14 +65,14 @@ for($ligne =8; $ligne <= 19; $ligne++ )
 				echo "<td>";
 				foreach($resultat as $value){
 
-	$id=$value[0];
+					$id=$_SESSION['id'];
 					$jour=date("w", strtotime($value[3]));
 					$heure=date("H", strtotime($value[3]));
 				
 					if($heure==$ligne && $jour== $colonne)
 						{
 						
-						echo"<a href=\"reservation.php?id=".$id."\">$value[2]</a>";
+						echo"<a href=\"reservation.php?id=".$id."\">$value[1]</a>";
 						
 						
 					

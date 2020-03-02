@@ -11,7 +11,7 @@
  <nav>
 <ul>
 <?php include('header.php');
-if(isset($_SESSION['deconnexion'])){header('Location: connexion.php');}?>
+?>
 
 </ul>
  </nav>
@@ -20,9 +20,18 @@ if(isset($_SESSION['deconnexion'])){header('Location: connexion.php');}?>
 
 <section>
 	<article class="fermeture">
-		
-<h1> <a href='connexion.php'> Reservez votre creneau </h1></a>
 
+	<?php 
+
+if(isset($_SESSION['login']) || isset($_SESSION['pass']))
+{
+	echo "<h1> <a href='reservation-form.php'> Reservez votre creneau </h1></a>";
+	}
+	else{
+	echo "<h1> <a href='connexion.php'> Reservez votre creneau </h1></a>";
+	}
+
+?>
 
 </article>
 </section>

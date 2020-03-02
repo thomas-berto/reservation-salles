@@ -19,34 +19,29 @@
 
 <section class='contai'>
       <?php  
-     
+         $id=$_SESSION['id'];
+
 $connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
 $sql = "SELECT reservations.titre, reservations.description,reservations.debut,reservations.fin,utilisateurs.id,
- utilisateurs.login FROM reservations INNER JOIN utilisateurs
-ON reservations.id_utilisateur = utilisateurs.id ";
+ utilisateurs.login FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE id_utilisateur=$id ";
        $resultat = mysqli_query($connexion, $sql);
        while($data = mysqli_fetch_array($resultat))
        {
       ?>
 
-<article>
 		 <article class='login'><?php echo $data['login'];?></article>
              <article class='login'><?php echo $data['titre'];?></article>
-             <artile class='reservation'><?php echo $data['description'];?></article>	
+             <artiCle class='reservation'><?php echo $data['description'];?></article>	
              <article class='reservation'><?php echo $data['debut'];?></article>
              <article  class='reservation'><?php echo $data['fin'];?></article>
-                          </article>
     </section>
     <?php
-		  }
-			
-		
+	
+}
 
-
-			
-					?>
+				?>
 </main>
-<footer>
+<footer> 
 				
 				Copyright © 2020 All rights reserved
 		

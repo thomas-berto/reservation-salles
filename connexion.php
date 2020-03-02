@@ -55,6 +55,7 @@ if(isset($_POST["Connexion"]))
 
 	$login=$_POST["login"];
 	$password=$_POST["pass"];
+	$password = sha1($password);
 	$connexion=mysqli_connect("localhost","root","","reservationsalles");
 	$requete = "SELECT * FROM utilisateurs WHERE login='$login'";
 	$query=mysqli_query($connexion,$requete);

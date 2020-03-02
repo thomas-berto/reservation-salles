@@ -27,12 +27,14 @@ $sql = "SELECT * FROM utilisateurs WHERE id='".$_SESSION['id']."'";
 $req = mysqli_query($connexion, $sql);
 $req2 = mysqli_fetch_assoc($req);
 
+
 if(isset($_POST['modifier']))
 {
 	if(!empty($_POST['login']) && !empty($_POST['pass']))
 	{
 		$login = $_POST['login'];
 		$passe = $_POST['pass'];
+		$passe = sha1($passe);
 		$modif_login = false;
 		$modif_passe = false;
 	
@@ -53,7 +55,7 @@ if(isset($_POST['modifier']))
 		
 		}
 		
-		if($passe != $req2['confirmpass'])
+		if($passe != $req2['Password'])
 		{
 			
 			$sql = "UPDATE utilisateurs SET password = '$passe' WHERE login = '".$_SESSION['login']."'";

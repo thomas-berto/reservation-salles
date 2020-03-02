@@ -2,20 +2,22 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="index.css"/>
-		<title>reservation</title>
+		<title>Inscription</title>
 	</head>
 	<body>
-		<header class="menu">
+		<header class='menu'>
 		<nav>
 <ul>
 <?php include('header.php');
-		if(!isset($_SESSION['login'])){header('Location: connexion.php');}
-		?>
+?>
 </ul>
  </nav>
 		</header>
 		
 		<main>
+
+
+
 
 <form action="reservation-form.php" method="post">
 <fieldset>
@@ -28,31 +30,33 @@
 <legend>date </legend>      
 <label>Date de début :</label>
 		<input type="datetime-local" name="debut">
-<!<label>Date de fin :</label>
+<label>Date de fin :</label>
         <input type="datetime-local" name="fin">
 </fieldset>
-<fieldset>  
-        <input type="submit" name="reserver" value="Reserver">
-</fieldset>
+        <input type="submit" name="reservez" value="Reservez">
+
 </form>
 
 <?php
-if(isset($_POST["reserver"]))
+if(isset($_POST["reservez"]))
 {
+
+	
 	$titre=$_POST["titre"];
-	$description=$_POST["description"];
+	$des=$_POST["description"];
 	$debut= $_POST["debut"];
 	$fin=$_POST["fin"];		
     $connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
     
-	$requete = "INSERT INTO `reservations` (`titre`, `description`, `debut`, `fin`, `id_utilisateur`)
-	VALUES('".$titre."', '".$description."', '".$debut."', '".$fin."' , '".$_SESSION["id"]."')"; 
+	$requete = "INSERT INTO `reservations` (`id`, `titre`, `description`, `debut`, `fin`, `id_utilisateur`)
+VALUES (NULL,'".$titre."', '".$des."', '".$debut."', '".$fin."' , '".$_SESSION["id"]."')";  
   $query = mysqli_query($connexion, $requete);
-
-    
 
 	header('Location: planning.php');
 	
+}
+else{
+	echo'creneau indisponible';
 }
 
 ?>
@@ -70,3 +74,4 @@ if(isset($_POST["reserver"]))
 	</footer>	
 </body>
 </html>
+

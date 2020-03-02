@@ -28,7 +28,7 @@ if (isset($_SESSION['login'])):
 
 
  <?php else:?>     
- <
+ 
 
        <li><a class="lasuite" href="index.php">Acceuil</a></li>
        <li><a href="inscription.php">Inscription</a></li>
