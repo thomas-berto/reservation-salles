@@ -36,8 +36,6 @@
 						
 $ligne = 11;
 $colonne = 7;
-$jour = array('Lundi','Mardi','Mercredi','Jeudi','Vendredi',
-'Samedi','Dimanche');
 $heure=array('08h00','09h00','10h00','11h00','12h00','13h00',
 '14h00','15h00','16h00','17h00','18h00','19h00')	;
 $connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
@@ -77,11 +75,7 @@ for($ligne =8; $ligne <= 19; $ligne++ )
 						
 					
 						}
-						else{
-							//echo "non";
-						}
-						
-						
+					
 						
 						 
 		
@@ -95,7 +89,6 @@ for($ligne =8; $ligne <= 19; $ligne++ )
 
 
 
-</tr>
    </tbody>
 
 </table>

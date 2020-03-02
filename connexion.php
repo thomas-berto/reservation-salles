@@ -47,16 +47,15 @@
 </section>
 </main>
 
-
 <?php
 
 if(isset($_POST["Connexion"]))
 {
 
 	$login=$_POST["login"];
-	$password=$_POST["pass"];
+	$password=($_POST["pass"]);
 	$password = sha1($password);
-	$connexion=mysqli_connect("localhost","root","","reservationsalles");
+	$connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
 	$requete = "SELECT * FROM utilisateurs WHERE login='$login'";
 	$query=mysqli_query($connexion,$requete);
 	$resultat=mysqli_fetch_all($query);
@@ -67,36 +66,15 @@ if(isset($_POST["Connexion"]))
 
     if ($password == $resultat[0][2])
     {
+    
       $_SESSION['id']=$resultat[0][0];
       $_SESSION['login']=$resultat[0][1];
-      //var_dump($resultat);
     mysqli_close($connexion);
     header('Location: planning.php');
-   }
-    else
-    {
-      ?>
-      <div class="test">
-    <?php
-      echo "le mot de passe est incorrect";
-        ?>
-      </div>
-    <?php
+    
     }
 
   }
-  else
-  {
-    ?>
-      <div class="test">
-    <?php
-      echo "l'identifiant n'existe pas";
-    ?>
-      </div>
-    <?php
-
-  }
-
 }
 
 ?>

@@ -1,53 +1,79 @@
 
 
+
 <html>
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="index.css"/>
 		<title>Inscription</title>
 	</head>
-	<body class="inscription">
-		<header class="menu">
-
-	<nav>
-
-			<ul>
-			<?php include('header.php') ;?>
- 			</ul>
-		
-
+	<body class='inscription'>
+		<header>
+		<nav>
+<ul>
+<?php include('header.php');
+if(isset($_SESSION['login']) || isset($_SESSION['pass']))
+{
+	header('Location: index.php');
+} ?>
+</ul>
  </nav>
-
-		<?php
-		if(isset($_SESSION['login']) || isset($_SESSION['pass']))  
-		{
-			header('Location: index.php');
-		}
-			?>
-
 		</header>
 		
 		<main>
-			<section>
-				<article class="box">
+		<article class="box">
 				<form action="inscription.php" method="post">
-					<div class="titre">
-						<legend>inscription</legend>
-					</div>
+				<div class="titre">
+				<legend>inscription</legend>
+				</div>
 					<div class="input-container">
 					<input type="text" name="login"  placeholder="login"/>
-					<input type="password" name="pass"  placeholder="password"required>
-					<input type="password" name="confirmpass"  placeholder="confirmation"required>	
-					<div class="btn">
+					<input type="password" name="passe"  placeholder="password"/>
+					<input type="password" name="passe2"  placeholder="confirmation"/>
+				<div class="btn">				
 					<input type="submit" value="inscription" name="inscription"/>
-					</div></div>
-			
-
-				
-</form>	
-</div>
+				</div></div>
+				</form>
 
 
+<?php
+	if (isset($_POST['inscription']))
+	{
+		$login = $_POST['login'];
+		$passe = $_POST['passe'];
+		$passe = sha1($passe);
+		$passe2 = $_POST['passe2'];
+		$connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
+				$requete = "SELECT login FROM utilisateurs WHERE login = '$login'";
+		$query = mysqli_query($connexion, $requete);	
+		$resultat = mysqli_num_rows($query); 
+
+		
+		
+
+                    if ($resultat==1) 
+                    {	
+
+
+                    ?>
+                    <h2 class='titre'><p>Ce Login est déjà prit</p></h2>
+					<?php 
+                      }
+  elseif ($_POST["passe"] != $_POST["passe2"]) 
+              {
+  ?>
+	 <h2 class='titre'> <p>Attention ! Mot de passe différents</p></h2>
+  <?php
+              }
+  else 
+  {
+	  $requete2 = "INSERT INTO utilisateurs(login, password) VALUES ('$login', '$passe')";
+	  $query2 = mysqli_query($connexion, $requete2);
+	  header('Location:connexion.php');
+  }
+}
+
+?>	
 
 
 
@@ -58,43 +84,7 @@
 
 
 
-<?php
-if(isset($_POST["inscription"]))
-{
 
-	
-	$login=$_POST["login"];
-	$pass=$_POST["pass"];
-	$confirmpass=$_POST["confirmpass"];	
-	if($pass==$confirmpass)
-		{
-
-	$connexion = mysqli_connect("localhost", "root", "", "reservationsalles");
-	$requete = "INSERT INTO utilisateurs(id,login, password) values (NULL,'$login','$pass')";
-	$query = mysqli_query($connexion, $requete);
-	mysqli_close($connexion);
-	header('Location: connexion.php');
-	
-}
-else{
-
-	?>
-	<div class="test">
-		<?php
-		echo "les mdp ne correspondent pas";
-		?>
-		</div>
-		<?php
-	}
-
-
-
-	
-	
-}
-?>
-		
-			
 
 <footer>
 				<section>
